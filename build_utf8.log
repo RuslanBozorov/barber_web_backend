@@ -1,0 +1,722 @@
+﻿
+> barber_web_backend@0.0.1 build
+> nest build
+
+node.exe : [96msrc/auth/a
+uth.module.ts[0m:[93m14
+[0m:[93m7[0m - [91merro
+r[0m[90m TS2322: [0mTyp
+e '(configService: ConfigS
+ervice) => Promise<{ secre
+t: string | undefined; sig
+nOptions: { expiresIn: str
+ing; }; }>' is not assigna
+ble to type '(...args: any
+[]) => JwtModuleOptions | 
+Promise<JwtModuleOptions>'
+.
+C:\Program Files\nodejs\np
+m.ps1:29 знак:3
++   & $NODE_EXE $NPM_CLI_J
+S $args
++   ~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (  
+  [96msrc/auth/a...odul   
+ eOptions>'.:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+  Type 'Promise<{ secret: 
+string | undefined; signOp
+tions: { expiresIn: string
+; }; }>' is not assignable
+ to type 'JwtModuleOptions
+ | Promise<JwtModuleOption
+s>'.
+    Type 'Promise<{ secret
+: string | undefined; sign
+Options: { expiresIn: stri
+ng; }; }>' is not assignab
+le to type 'Promise<JwtMod
+uleOptions>'.
+      Type '{ secret: stri
+ng | undefined; signOption
+s: { expiresIn: string; };
+ }' is not assignable to t
+ype 'JwtModuleOptions'.
+        The types of 'sign
+Options.expiresIn' are inc
+ompatible between these ty
+pes.
+          Type 'string' is
+ not assignable to type 'n
+umber | StringValue | unde
+fined'.
+
+[7m14[0m       useFactor
+y: async (configService: C
+onfigService) => ({
+[7m  [0m [91m      ~~~~
+~~~~~~[0m
+
+  [96mnode_modules/@nestj
+s/jwt/dist/interfaces/jwt-
+module-options.interface.d
+.ts[0m:[93m24[0m:[93m5
+[0m
+    [7m24[0m     useFact
+ory?: (...args: any[]) => 
+Promise<JwtModuleOptions> 
+| JwtModuleOptions;
+    [7m  [0m [96m    ~~
+~~~~~~~~[0m
+    The expected type come
+s from property 'useFactor
+y' which is declared here 
+on type 'JwtModuleAsyncOpt
+ions'
+[96msrc/auth/auth.service
+.ts[0m:[93m16[0m:[93m4
+4[0m - [91merror[0m[90
+m TS2339: [0mProperty 'us
+er' does not exist on type
+ 'PrismaService'.
+
+[7m16[0m     const exist
+ingUser = await this.prism
+a.user.findUnique({
+[7m  [0m [91m          
+                          
+       ~~~~[0m
+[96msrc/auth/auth.service
+.ts[0m:[93m26[0m:[93m3
+6[0m - [91merror[0m[90
+m TS2339: [0mProperty 'us
+er' does not exist on type
+ 'PrismaService'.
+
+[7m26[0m     const user 
+= await this.prisma.user.c
+reate({
+[7m  [0m [91m          
+                         ~
+~~~[0m
+[96msrc/auth/auth.service
+.ts[0m:[93m37[0m:[93m3
+6[0m - [91merror[0m[90
+m TS2339: [0mProperty 'us
+er' does not exist on type
+ 'PrismaService'.
+
+[7m37[0m     const user 
+= await this.prisma.user.f
+indUnique({
+[7m  [0m [91m          
+                         ~
+~~~[0m
+[96msrc/auth/decorators/r
+oles.decorator.ts[0m:[93
+m2[0m:[93m10[0m - [91m
+error[0m[90m TS2305: [0
+mModule '"@prisma/client"'
+ has no exported member 'R
+ole'.
+
+[7m2[0m import { Role } 
+from '@prisma/client';
+[7m [0m [91m         ~~
+~~[0m
+[96msrc/auth/dto/register
+.dto.ts[0m:[93m3[0m:[9
+3m10[0m - [91merror[0m
+[90m TS2305: [0mModule '"
+@prisma/client"' has no ex
+ported member 'Role'.
+
+[7m3[0m import { Role } 
+from '@prisma/client';
+[7m [0m [91m         ~~
+~~[0m
+[96msrc/auth/guards/roles
+.guard.ts[0m:[93m3[0m:
+[93m10[0m - [91merror[0
+m[90m TS2305: [0mModule 
+'"@prisma/client"' has no 
+exported member 'Role'.
+
+[7m3[0m import { Role } 
+from '@prisma/client';
+[7m [0m [91m         ~~
+~~[0m
+[96msrc/auth/strategies/j
+wt.strategy.ts[0m:[93m13
+[0m:[93m11[0m - [91mer
+ror[0m[90m TS2345: [0mA
+rgument of type '[{ jwtFro
+mRequest: JwtFromRequestFu
+nction<any>; ignoreExpirat
+ion: false; secretOrKey: s
+tring | undefined; }]' is 
+not assignable to paramete
+r of type '[opt: StrategyO
+ptionsWithRequest] | [opt:
+ StrategyOptionsWithoutReq
+uest]'.
+  Type '[{ jwtFromRequest:
+ JwtFromRequestFunction<an
+y>; ignoreExpiration: fals
+e; secretOrKey: string | u
+ndefined; }]' is not assig
+nable to type '[opt: Strat
+egyOptionsWithoutRequest]'
+.
+    Type '{ jwtFromRequest
+: JwtFromRequestFunction<a
+ny>; ignoreExpiration: fal
+se; secretOrKey: string | 
+undefined; }' is not assig
+nable to type 'StrategyOpt
+ionsWithoutRequest'.
+      Type '{ jwtFromReque
+st: JwtFromRequestFunction
+<any>; ignoreExpiration: f
+alse; secretOrKey: string 
+| undefined; }' is not ass
+ignable to type 'Omit<With
+SecretOrKey, "secretOrKeyP
+rovider"> & { passReqToCal
+lback?: false | undefined;
+ }'.
+        Type '{ jwtFromReq
+uest: JwtFromRequestFuncti
+on<any>; ignoreExpiration:
+ false; secretOrKey: strin
+g | undefined; }' is not a
+ssignable to type 'Omit<Wi
+thSecretOrKey, "secretOrKe
+yProvider">'.
+          Types of propert
+y 'secretOrKey' are incomp
+atible.
+            Type 'string |
+ undefined' is not assigna
+ble to type 'string | Buff
+er<ArrayBufferLike>'.
+              Type 'undefi
+ned' is not assignable to 
+type 'string | Buffer<Arra
+yBufferLike>'.
+
+[7m 13[0m     super({
+[7m   [0m [91m         
+ ~[0m
+[7m 14[0m       jwtFromR
+equest: ExtractJwt.fromAut
+hHeaderAsBearerToken(),
+[7m   [0m [91m~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~[0m
+[7m...[0m 
+[7m 16[0m       secretOr
+Key: configService.get<str
+ing>('JWT_SECRET'),
+[7m   [0m [91m~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~[
+0m
+[7m 17[0m     });
+[7m   [0m [91m~~~~~[0m
+[96msrc/auth/strategies/j
+wt.strategy.ts[0m:[93m21
+[0m:[93m36[0m - [91mer
+ror[0m[90m TS2339: [0mP
+roperty 'user' does not ex
+ist on type 'PrismaService
+'.
+
+[7m21[0m     const user 
+= await this.prisma.user.f
+indUnique({
+[7m  [0m [91m          
+                         ~
+~~~[0m
+[96msrc/bookings/bookings
+.controller.ts[0m:[93m8
+[0m:[93m10[0m - [91merr
+or[0m[90m TS2305: [0mMo
+dule '"@prisma/client"' ha
+s no exported member 'Role
+'.
+
+[7m8[0m import { Role } 
+from '@prisma/client';
+[7m [0m [91m         ~~
+~~[0m
+[96msrc/bookings/bookings
+.service.ts[0m:[93m11[0
+m:[93m38[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'user' does not exist
+ on type 'PrismaService'.
+
+[7m11[0m     const maste
+r = await this.prisma.user
+.findUnique({ where: { id:
+ dto.masterId, role: 'mast
+er' } });
+[7m  [0m [91m          
+                          
+ ~~~~[0m
+[96msrc/bookings/bookings
+.service.ts[0m:[93m15[0
+m:[93m39[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'service' does not ex
+ist on type 'PrismaService
+'.
+
+[7m15[0m     const servi
+ce = await this.prisma.ser
+vice.findUnique({ where: {
+ id: dto.serviceId } });
+[7m  [0m [91m          
+                          
+  ~~~~~~~[0m
+[96msrc/bookings/bookings
+.service.ts[0m:[93m22[0
+m:[93m40[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'booking' does not ex
+ist on type 'PrismaService
+'.
+
+[7m22[0m     const exist
+ing = await this.prisma.bo
+oking.findUnique({
+[7m  [0m [91m          
+                          
+   ~~~~~~~[0m
+[96msrc/bookings/bookings
+.service.ts[0m:[93m37[0
+m:[93m39[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'booking' does not ex
+ist on type 'PrismaService
+'.
+
+[7m37[0m     const booki
+ng = await this.prisma.boo
+king.create({
+[7m  [0m [91m          
+                          
+  ~~~~~~~[0m
+[96msrc/bookings/bookings
+.service.ts[0m:[93m51[0
+m:[93m24[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'booking' does not ex
+ist on type 'PrismaService
+'.
+
+[7m51[0m     return this
+.prisma.booking.findMany({
+[7m  [0m [91m          
+             ~~~~~~~[0m
+[96msrc/bookings/bookings
+.service.ts[0m:[93m62[0
+m:[93m24[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'booking' does not ex
+ist on type 'PrismaService
+'.
+
+[7m62[0m     return this
+.prisma.booking.findMany({
+[7m  [0m [91m          
+             ~~~~~~~[0m
+[96msrc/bookings/bookings
+.service.ts[0m:[93m73[0
+m:[93m39[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'booking' does not ex
+ist on type 'PrismaService
+'.
+
+[7m73[0m     const booki
+ng = await this.prisma.boo
+king.findUnique({ where: {
+ id: bookingId } });
+[7m  [0m [91m          
+                          
+  ~~~~~~~[0m
+[96msrc/bookings/bookings
+.service.ts[0m:[93m82[0
+m:[93m24[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'booking' does not ex
+ist on type 'PrismaService
+'.
+
+[7m82[0m     return this
+.prisma.booking.update({
+[7m  [0m [91m          
+             ~~~~~~~[0m
+[96msrc/bookings/dto/book
+ing.dto.ts[0m:[93m3[0m:
+[93m10[0m - [91merror[
+0m[90m TS2305: [0mModule
+ '"@prisma/client"' has no
+ exported member 'BookingS
+tatus'.
+
+[7m3[0m import { Booking
+Status } from '@prisma/cli
+ent';
+[7m [0m [91m         ~~
+~~~~~~~~~~~[0m
+[96msrc/chat/chat.gateway
+.ts[0m:[93m40[0m:[93m7
+[0m - [91merror[0m[90m
+ TS2532: [0mObject is pos
+sibly 'undefined'.
+
+[7m40[0m       this.acti
+veUsers.get(userId).push(c
+lient.id);
+[7m  [0m [91m      ~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~[
+0m
+[96msrc/chat/chat.gateway
+.ts[0m:[93m51[0m:[93m2
+3[0m - [91merror[0m[90
+m TS2532: [0mObject is po
+ssibly 'undefined'.
+
+[7m51[0m       const soc
+kets = this.activeUsers.ge
+t(userId).filter(id => id 
+!== client.id);
+[7m  [0m [91m          
+            ~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~[0m
+[96msrc/chat/chat.service
+.ts[0m:[93m9[0m:[93m24
+[0m - [91merror[0m[90m
+ TS2339: [0mProperty 'mes
+sage' does not exist on ty
+pe 'PrismaService'.
+
+[7m9[0m     return this.
+prisma.message.create({
+[7m [0m [91m           
+            ~~~~~~~[0m
+[96msrc/chat/chat.service
+.ts[0m:[93m22[0m:[93m2
+4[0m - [91merror[0m[90
+m TS2339: [0mProperty 'me
+ssage' does not exist on t
+ype 'PrismaService'.
+
+[7m22[0m     return this
+.prisma.message.findMany({
+[7m  [0m [91m          
+             ~~~~~~~[0m
+[96msrc/masters/dto/updat
+e-master.dto.ts[0m:[93m3
+[0m:[93m10[0m - [91mer
+ror[0m[90m TS2305: [0mM
+odule '"@prisma/client"' h
+as no exported member 'Mas
+terType'.
+
+[7m3[0m import { MasterT
+ype } from '@prisma/client
+';
+[7m [0m [91m         ~~
+~~~~~~~~[0m
+[96msrc/masters/masters.c
+ontroller.ts[0m:[93m8[0
+m:[93m10[0m - [91merror
+[0m[90m TS2305: [0mModu
+le '"@prisma/client"' has 
+no exported member 'Role'.
+
+[7m8[0m import { Role } 
+from '@prisma/client';
+[7m [0m [91m         ~~
+~~[0m
+[96msrc/masters/masters.s
+ervice.ts[0m:[93m14[0m:
+[93m39[0m - [91merror[
+0m[90m TS2339: [0mProper
+ty 'masterProfile' does no
+t exist on type 'PrismaSer
+vice'.
+
+[7m14[0m     const maste
+rs = await this.prisma.mas
+terProfile.findMany({
+[7m  [0m [91m          
+                          
+  ~~~~~~~~~~~~~[0m
+[96msrc/masters/masters.s
+ervice.ts[0m:[93m25[0m:
+[93m37[0m - [91merror[
+0m[90m TS2339: [0mProper
+ty 'masterProfile' does no
+t exist on type 'PrismaSer
+vice'.
+
+Found 46 error(s).
+
+[7m25[0m     const total
+ = await this.prisma.maste
+rProfile.count({ where: { 
+deletedAt: null } });
+[7m  [0m [91m          
+                          
+~~~~~~~~~~~~~[0m
+[96msrc/masters/masters.s
+ervice.ts[0m:[93m34[0m:
+[93m38[0m - [91merror[
+0m[90m TS2339: [0mProper
+ty 'masterProfile' does no
+t exist on type 'PrismaSer
+vice'.
+
+[7m34[0m     const maste
+r = await this.prisma.mast
+erProfile.findUnique({
+[7m  [0m [91m          
+                          
+ ~~~~~~~~~~~~~[0m
+[96msrc/masters/masters.s
+ervice.ts[0m:[93m51[0m:
+[93m24[0m - [91merror[
+0m[90m TS2339: [0mProper
+ty 'masterProfile' does no
+t exist on type 'PrismaSer
+vice'.
+
+[7m51[0m     return this
+.prisma.masterProfile.upse
+rt({
+[7m  [0m [91m          
+             ~~~~~~~~~~~~~
+[0m
+[96msrc/prisma/prisma.ser
+vice.ts[0m:[93m2[0m:[9
+3m10[0m - [91merror[0m
+[90m TS2305: [0mModule '"
+@prisma/client"' has no ex
+ported member 'PrismaClien
+t'.
+
+[7m2[0m import { PrismaC
+lient } from '@prisma/clie
+nt';
+[7m [0m [91m         ~~
+~~~~~~~~~~[0m
+[96msrc/prisma/prisma.ser
+vice.ts[0m:[93m7[0m:[9
+3m16[0m - [91merror[0m
+[90m TS2339: [0mProperty 
+'$connect' does not exist 
+on type 'PrismaService'.
+
+[7m7[0m     await this.$
+connect();
+[7m [0m [91m           
+    ~~~~~~~~[0m
+[96msrc/prisma/prisma.ser
+vice.ts[0m:[93m11[0m:[
+93m16[0m - [91merror[0m
+[90m TS2339: [0mProperty
+ '$disconnect' does not ex
+ist on type 'PrismaService
+'.
+
+[7m11[0m     await this.
+$disconnect();
+[7m  [0m [91m          
+     ~~~~~~~~~~~[0m
+[96msrc/salons/salons.con
+troller.ts[0m:[93m8[0m:
+[93m10[0m - [91merror[
+0m[90m TS2305: [0mModule
+ '"@prisma/client"' has no
+ exported member 'Role'.
+
+[7m8[0m import { Role } 
+from '@prisma/client';
+[7m [0m [91m         ~~
+~~[0m
+[96msrc/salons/salons.ser
+vice.ts[0m:[93m12[0m:[
+93m38[0m - [91merror[0m
+[90m TS2339: [0mProperty
+ 'salon' does not exist on
+ type 'PrismaService'.
+
+[7m12[0m     const salon
+s = await this.prisma.salo
+n.findMany({
+[7m  [0m [91m          
+                          
+ ~~~~~[0m
+[96msrc/salons/salons.ser
+vice.ts[0m:[93m21[0m:[
+93m37[0m - [91merror[0m
+[90m TS2339: [0mProperty
+ 'salon' does not exist on
+ type 'PrismaService'.
+
+[7m21[0m     const total
+ = await this.prisma.salon
+.count({ where: { deletedA
+t: null } });
+[7m  [0m [91m          
+                          
+~~~~~[0m
+[96msrc/salons/salons.ser
+vice.ts[0m:[93m27[0m:[
+93m37[0m - [91merror[0m
+[90m TS2339: [0mProperty
+ 'salon' does not exist on
+ type 'PrismaService'.
+
+[7m27[0m     const salon
+ = await this.prisma.salon
+.findUnique({
+[7m  [0m [91m          
+                          
+~~~~~[0m
+[96msrc/salons/salons.ser
+vice.ts[0m:[93m43[0m:[
+93m24[0m - [91merror[0m
+[90m TS2339: [0mProperty
+ 'salon' does not exist on
+ type 'PrismaService'.
+
+[7m43[0m     return this
+.prisma.salon.upsert({
+[7m  [0m [91m          
+             ~~~~~[0m
+[96msrc/services/services
+.controller.ts[0m:[93m8
+[0m:[93m10[0m - [91merr
+or[0m[90m TS2305: [0mMo
+dule '"@prisma/client"' ha
+s no exported member 'Role
+'.
+
+[7m8[0m import { Role } 
+from '@prisma/client';
+[7m [0m [91m         ~~
+~~[0m
+[96msrc/services/services
+.service.ts[0m:[93m10[0
+m:[93m24[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'service' does not ex
+ist on type 'PrismaService
+'.
+
+[7m10[0m     return this
+.prisma.service.create({ d
+ata: dto });
+[7m  [0m [91m          
+             ~~~~~~~[0m
+[96msrc/services/services
+.service.ts[0m:[93m14[0
+m:[93m24[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'service' does not ex
+ist on type 'PrismaService
+'.
+
+[7m14[0m     return this
+.prisma.service.findMany({
+[7m  [0m [91m          
+             ~~~~~~~[0m
+[96msrc/services/services
+.service.ts[0m:[93m23[0
+m:[93m39[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'service' does not ex
+ist on type 'PrismaService
+'.
+
+[7m23[0m     const servi
+ce = await this.prisma.ser
+vice.findUnique({ where: {
+ id } });
+[7m  [0m [91m          
+                          
+  ~~~~~~~[0m
+[96msrc/services/services
+.service.ts[0m:[93m32[0
+m:[93m24[0m - [91merror
+[0m[90m TS2339: [0mProp
+erty 'service' does not ex
+ist on type 'PrismaService
+'.
+
+[7m32[0m     return this
+.prisma.service.update({
+[7m  [0m [91m          
+             ~~~~~~~[0m
+[96msrc/upload/upload.con
+troller.ts[0m:[93m30[0m
+:[93m23[0m - [91merror
+[0m[90m TS2339: [0mPrope
+rty 'user' does not exist 
+on type 'PrismaService'.
+
+[7m30[0m     await this.
+prisma.user.update({
+[7m  [0m [91m          
+            ~~~~[0m
+[96msrc/upload/upload.con
+troller.ts[0m:[93m49[0m
+:[93m23[0m - [91merror
+[0m[90m TS2339: [0mPrope
+rty 'masterProfile' does n
+ot exist on type 'PrismaSe
+rvice'.
+
+[7m49[0m     await this.
+prisma.masterProfile.upser
+t({
+[7m  [0m [91m          
+            ~~~~~~~~~~~~~
+[0m
+[96msrc/upload/upload.ser
+vice.ts[0m:[93m26[0m:[
+93m21[0m - [91merror[0m
+[90m TS18048: [0m'result
+' is possibly 'undefined'.
+
+[7m26[0m             res
+olve(result.secure_url);
+[7m  [0m [91m          
+          ~~~~~~[0m
+[96msrc/users/users.servi
+ce.ts[0m:[93m9[0m:[93m
+36[0m - [91merror[0m[9
+0m TS2339: [0mProperty 'u
+ser' does not exist on typ
+e 'PrismaService'.
+
+[7m9[0m     const user =
+ await this.prisma.user.fi
+ndUnique({
+[7m [0m [91m           
+                        ~~
+~~[0m
+

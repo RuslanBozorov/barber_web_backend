@@ -1,0 +1,29 @@
+﻿Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+node.exe : Error: 
+C:\Program Files\nodejs\np
+x.ps1:29 знак:3
++   & $NODE_EXE $NPX_CLI_J
+S $args
++   ~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (E  
+  rror: :String) [], Re   
+ moteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+EPERM: operation not permi
+tted, rename 'C:\Users\adm
+in\Desktop\barber_web_back
+end\node_modules\.prisma\c
+lient\query_engine-windows
+.dll.node.tmp25780' -> 'C:
+\Users\admin\Desktop\barbe
+r_web_backend\node_modules
+\.prisma\client\query_engi
+ne-windows.dll.node'
+
+

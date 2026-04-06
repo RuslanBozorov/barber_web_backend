@@ -1,0 +1,168 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  client
+  master
+  salon
+}
+
+enum MasterType {
+  male
+  female
+  unisex
+}
+
+enum BookingStatus {
+  pending
+  confirmed
+  canceled
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  phone     String   @unique
+  password  String
+  role      Role     @default(client)
+  avatar    String?
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  masterProfile  MasterProfile?
+  ownedSalon     Salon?
+  bookings       Booking[]       @relation("UserBookings")
+  masterBookings Booking[]       @relation("MasterBookings")
+  sentMessages   Message[]       @relation("SentMessages")
+  receivedMessages Message[]     @relation("ReceivedMessages")
+  ratings        Rating[]        @relation("UserRatings")
+  receivedRatings Rating[]       @relation("MasterRatings")
+
+  @@map("users")
+}
+
+model MasterProfile {
+  id          String     @id @default(uuid())
+  userId      String     @unique
+  masterType  MasterType @default(unisex)
+  experience  Int        @default(0)
+  rating      Float      @default(0)
+  bio         String?
+  bannerImage String?
+  location    String?
+  latitude    Float?
+  longitude   Float?
+  salonId     String?
+  deletedAt   DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  user     User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  salon    Salon?            @relation(fields: [salonId], references: [id], onDelete: SetNull)
+  services MasterService[]
+
+  @@map("master_profiles")
+}
+
+model Salon {
+  id          String    @id @default(uuid())
+  ownerId     String    @unique
+  name        String
+  description String?
+  address     String?
+  latitude    Float?
+  longitude   Float?
+  images      String[]  @default([])
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  owner   User            @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  masters MasterProfile[]
+
+  @@map("salons")
+}
+
+model Service {
+  id        String   @id @default(uuid())
+  name      String
+  category  String
+  price     Float
+  duration  Int      // minutes
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  masters  MasterService[]
+  bookings Booking[]
+
+  @@map("services")
+}
+
+model MasterService {
+  id        String @id @default(uuid())
+  masterId  String
+  serviceId String
+
+  master  MasterProfile @relation(fields: [masterId], references: [id], onDelete: Cascade)
+  service Service       @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@unique([masterId, serviceId])
+  @@map("master_services")
+}
+
+model Booking {
+  id        String        @id @default(uuid())
+  userId    String
+  masterId  String
+  serviceId String
+  date      DateTime      @db.Date
+  time      String        // HH:mm format
+  status    BookingStatus @default(pending)
+  deletedAt DateTime?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  user    User    @relation("UserBookings", fields: [userId], references: [id], onDelete: Cascade)
+  master  User    @relation("MasterBookings", fields: [masterId], references: [id], onDelete: Cascade)
+  service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@unique([masterId, date, time])
+  @@map("bookings")
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  senderId   String
+  receiverId String
+  text       String
+  createdAt  DateTime @default(now())
+
+  sender   User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model Rating {
+  id        String   @id @default(uuid())
+  userId    String
+  masterId  String
+  score     Int      // 1-5
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User @relation("UserRatings", fields: [userId], references: [id], onDelete: Cascade)
+  master User @relation("MasterRatings", fields: [masterId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, masterId])
+  @@map("ratings")
+}
