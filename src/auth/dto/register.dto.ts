@@ -3,24 +3,28 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 
 export class RegisterDto {
-  @ApiProperty()
+  @ApiProperty({ example: 'John Doe', description: 'User full name' })
   @IsString()
   @IsNotEmpty()
   name: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: '+998901234567', description: 'Phone number used for login and identification' })
   @IsString()
   @IsNotEmpty()
   phone: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'password123', description: 'User password (min 6 characters)' })
   @IsString()
   @IsNotEmpty()
   @MinLength(6)
   password: string;
 
-  @ApiPropertyOptional({ enum: Role, default: Role.client })
+  @ApiPropertyOptional({ 
+    enum: Role, 
+    default: Role.client, 
+    description: 'User role (client, master, or salon)' 
+  })
   @IsEnum(Role)
   @IsOptional()
-  role?: Role;
+  role?: Role = Role.client;
 }

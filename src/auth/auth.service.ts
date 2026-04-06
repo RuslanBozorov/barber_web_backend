@@ -1,4 +1,4 @@
-import { Injectable, ConflictException, UnauthorizedException } from '@nestjs/common';
+import { Injectable, ConflictException, UnauthorizedException, InternalServerErrorException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
@@ -13,24 +13,31 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterDto) {
-    const existingUser = await this.prisma.user.findUnique({
-      where: { phone: dto.phone },
-    });
+    try {
+      // 1. Hash the password
+      const hashedPassword = await bcrypt.hash(dto.password, 10);
 
-    if (existingUser) {
-      throw new ConflictException('User with this phone already exists');
+      // 2. Try creating user
+      const user = await this.prisma.user.create({
+        data: {
+          ...dto,
+          password: hashedPassword,
+        },
+      });
+
+      return this.generateToken(user);
+    } catch (error) {
+      // 3. Handle conflict error (phone number unique constraint)
+      if (error.code === 'P2002') {
+        throw new ConflictException('This phone number is already registered.');
+      }
+      
+      // 4. Log and throw generic error if something else fails
+      console.error('Registration error:', error);
+      throw new InternalServerErrorException(
+        'Registration failed. This might be due to a database connection issue or invalid data.'
+      );
     }
-
-    const hashedPassword = await bcrypt.hash(dto.password, 10);
-
-    const user = await this.prisma.user.create({
-      data: {
-        ...dto,
-        password: hashedPassword,
-      },
-    });
-
-    return this.generateToken(user);
   }
 
   async login(dto: LoginDto) {
