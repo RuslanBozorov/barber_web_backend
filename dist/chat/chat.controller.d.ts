@@ -1,8 +1,8 @@
-import { PrismaService } from '../prisma/prisma.service';
-export declare class ChatService {
-    private readonly prisma;
-    constructor(prisma: PrismaService);
-    saveMessage(senderId: string, receiverId: string, text: string): Promise<{
+import { ChatService } from './chat.service';
+export declare class ChatController {
+    private readonly chatService;
+    constructor(chatService: ChatService);
+    getConversations(req: any): Promise<({
         sender: {
             id: string;
             name: string;
@@ -17,32 +17,12 @@ export declare class ChatService {
         };
     } & {
         id: string;
-        text: string;
-        createdAt: Date;
         senderId: string;
         receiverId: string;
-    }>;
-    getChatHistory(userId1: string, userId2: string): Promise<({
-        sender: {
-            id: string;
-            name: string;
-            role: import(".prisma/client").$Enums.Role;
-            avatar: string | null;
-        };
-        receiver: {
-            id: string;
-            name: string;
-            role: import(".prisma/client").$Enums.Role;
-            avatar: string | null;
-        };
-    } & {
-        id: string;
         text: string;
         createdAt: Date;
-        senderId: string;
-        receiverId: string;
     })[]>;
-    getMyConversations(userId: string): Promise<({
+    getChatHistory(req: any, otherUserId: string): Promise<({
         sender: {
             id: string;
             name: string;
@@ -57,9 +37,9 @@ export declare class ChatService {
         };
     } & {
         id: string;
-        text: string;
-        createdAt: Date;
         senderId: string;
         receiverId: string;
+        text: string;
+        createdAt: Date;
     })[]>;
 }

@@ -33,9 +33,19 @@ let AuthController = class AuthController {
 exports.AuthController = AuthController;
 __decorate([
     (0, common_1.Post)('register'),
-    (0, swagger_1.ApiOperation)({ summary: 'Register a new user' }),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'User successfully registered' }),
-    (0, swagger_1.ApiResponse)({ status: 409, description: 'Phone already registered' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Register a new user (Ruhsat: Hamma)' }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'User successfully registered',
+        schema: {
+            properties: {
+                access_token: { type: 'string' },
+                user: { type: 'object' }
+            }
+        }
+    }),
+    (0, swagger_1.ApiResponse)({ status: 400, description: 'Incorrect data format' }),
+    (0, swagger_1.ApiResponse)({ status: 409, description: 'Phone number already exists in our database' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [register_dto_1.RegisterDto]),
@@ -44,9 +54,18 @@ __decorate([
 __decorate([
     (0, common_1.Post)('login'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, swagger_1.ApiOperation)({ summary: 'Login user' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'User successfully logged in' }),
-    (0, swagger_1.ApiResponse)({ status: 401, description: 'Invalid credentials' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Log in and get JWT token (Ruhsat: Hamma)' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Successful login',
+        schema: {
+            properties: {
+                access_token: { type: 'string' },
+                user: { type: 'object' }
+            }
+        }
+    }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Invalid login or password' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [login_dto_1.LoginDto]),

@@ -51,7 +51,7 @@ let UploadController = class UploadController {
 exports.UploadController = UploadController;
 __decorate([
     (0, common_1.Post)('avatar'),
-    (0, swagger_1.ApiOperation)({ summary: 'Upload profile image' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Upload profile image (Ruhsat: Avtorizatsiyadan o\'tganlar)' }),
     (0, swagger_1.ApiConsumes)('multipart/form-data'),
     (0, swagger_1.ApiBody)({
         schema: {
@@ -68,7 +68,7 @@ __decorate([
 ], UploadController.prototype, "uploadAvatar", null);
 __decorate([
     (0, common_1.Post)('banner'),
-    (0, swagger_1.ApiOperation)({ summary: 'Upload master banner image' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Upload master banner image (Ruhsat: Avtorizatsiyadan o\'tganlar)' }),
     (0, swagger_1.ApiConsumes)('multipart/form-data'),
     (0, swagger_1.ApiBody)({
         schema: {
@@ -85,7 +85,7 @@ __decorate([
 ], UploadController.prototype, "uploadBanner", null);
 __decorate([
     (0, common_1.Post)('salon-images'),
-    (0, swagger_1.ApiOperation)({ summary: 'Upload salon images' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Upload salon images (Ruhsat: Avtorizatsiyadan o\'tganlar)' }),
     (0, swagger_1.ApiConsumes)('multipart/form-data'),
     (0, swagger_1.ApiBody)({
         schema: {

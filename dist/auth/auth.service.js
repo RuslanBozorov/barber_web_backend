@@ -55,20 +55,25 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
     }
     async register(dto) {
-        const existingUser = await this.prisma.user.findUnique({
-            where: { phone: dto.phone },
-        });
-        if (existingUser) {
-            throw new common_1.ConflictException('User with this phone already exists');
+        try {
+            const hashedPassword = await bcrypt.hash(dto.password, 10);
+            const user = await this.prisma.user.create({
+                data: {
+                    ...dto,
+                    password: hashedPassword,
+                    masterProfile: dto.role === 'master' ? { create: {} } : undefined,
+                },
+                include: { masterProfile: true }
+            });
+            return this.generateToken(user);
         }
-        const hashedPassword = await bcrypt.hash(dto.password, 10);
-        const user = await this.prisma.user.create({
-            data: {
-                ...dto,
-                password: hashedPassword,
-            },
-        });
-        return this.generateToken(user);
+        catch (error) {
+            if (error.code === 'P2002') {
+                throw new common_1.ConflictException('This phone number is already registered.');
+            }
+            console.error('Registration error:', error);
+            throw new common_1.InternalServerErrorException('Registration failed. This might be due to a database connection issue or invalid data.');
+        }
     }
     async login(dto) {
         const user = await this.prisma.user.findUnique({

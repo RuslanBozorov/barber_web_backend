@@ -15,16 +15,14 @@ async function bootstrap() {
         transform: true,
         forbidNonWhitelisted: true,
     }));
-    if (process.env.NODE_ENV !== 'production') {
-        const config = new swagger_1.DocumentBuilder()
-            .setTitle('Barber Booking API')
-            .setDescription('API documentation for Barbershop Booking System')
-            .setVersion('1.0')
-            .addBearerAuth()
-            .build();
-        const document = swagger_1.SwaggerModule.createDocument(app, config);
-        swagger_1.SwaggerModule.setup('api/docs', app, document);
-    }
+    const config = new swagger_1.DocumentBuilder()
+        .setTitle('Barber Booking API')
+        .setDescription('API documentation for Barbershop Booking System')
+        .setVersion('1.0')
+        .addBearerAuth()
+        .build();
+    const document = swagger_1.SwaggerModule.createDocument(app, config);
+    swagger_1.SwaggerModule.setup('api/docs', app, document);
     const port = process.env.PORT || 10000;
     await app.listen(port);
     console.log(`Application is running on: http://localhost:${port}`);

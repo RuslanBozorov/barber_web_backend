@@ -12,10 +12,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingsService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const chat_gateway_1 = require("../chat/chat.gateway");
+const chat_service_1 = require("../chat/chat.service");
 let BookingsService = class BookingsService {
     prisma;
-    constructor(prisma) {
+    chatGateway;
+    chatService;
+    constructor(prisma, chatGateway, chatService) {
         this.prisma = prisma;
+        this.chatGateway = chatGateway;
+        this.chatService = chatService;
+    }
+    async notifyClient(bookingId, masterId) {
+        const booking = await this.prisma.booking.findUnique({
+            where: { id: bookingId },
+            include: { user: true }
+        });
+        if (!booking || booking.masterId !== masterId) {
+            throw new common_1.NotFoundException('Booking not found or access denied');
+        }
+        const messageText = `Sizning navbatingiz keldi! 15 daqiqadan so'ng kutamiz.`;
+        const message = await this.chatService.saveMessage(masterId, booking.userId, messageText);
+        this.chatGateway.server.emit(`notification_${booking.userId}`, {
+            message: messageText,
+            bookingId: booking.id
+        });
+        this.chatGateway.server.emit(`receive_message`, message);
+        return { success: true, message: 'Client notified' };
     }
     async create(userId, dto) {
         const master = await this.prisma.user.findUnique({ where: { id: dto.masterId, role: 'master' } });
@@ -85,6 +108,8 @@ let BookingsService = class BookingsService {
 exports.BookingsService = BookingsService;
 exports.BookingsService = BookingsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        chat_gateway_1.ChatGateway,
+        chat_service_1.ChatService])
 ], BookingsService);
 //# sourceMappingURL=bookings.service.js.map

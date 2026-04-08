@@ -12,47 +12,47 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersController = void 0;
+exports.ChatController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
-const users_service_1 = require("./users.service");
+const chat_service_1 = require("./chat.service");
 const jwt_auth_guard_1 = require("../auth/guards/jwt-auth.guard");
-const update_profile_dto_1 = require("./dto/update-profile.dto");
-let UsersController = class UsersController {
-    usersService;
-    constructor(usersService) {
-        this.usersService = usersService;
+let ChatController = class ChatController {
+    chatService;
+    constructor(chatService) {
+        this.chatService = chatService;
     }
-    async getProfile(req) {
-        return this.usersService.getProfile(req.user.id);
+    async getConversations(req) {
+        return this.chatService.getMyConversations(req.user.id);
     }
-    async updateProfile(req, dto) {
-        return this.usersService.updateProfile(req.user.id, dto);
+    async getChatHistory(req, otherUserId) {
+        return this.chatService.getChatHistory(req.user.id, otherUserId);
     }
 };
-exports.UsersController = UsersController;
+exports.ChatController = ChatController;
 __decorate([
-    (0, common_1.Get)('me'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get current user profile (Ruhsat: Avtorizatsiyadan o\'tganlar)' }),
+    (0, common_1.Get)('conversations'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get my conversations list (Ruhsat: Avtorizatsiyadan o\'tganlar)' }),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "getProfile", null);
+], ChatController.prototype, "getConversations", null);
 __decorate([
-    (0, common_1.Patch)('me'),
-    (0, swagger_1.ApiOperation)({ summary: 'Update current user profile (Ruhsat: Avtorizatsiyadan o\'tganlar)' }),
+    (0, common_1.Get)('history/:otherUserId'),
+    (0, swagger_1.ApiParam)({ name: 'otherUserId', description: 'Suhbatdosh foydalanuvchi ID si' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get chat history with a user (Ruhsat: Avtorizatsiyadan o\'tganlar)' }),
     __param(0, (0, common_1.Request)()),
-    __param(1, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('otherUserId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, update_profile_dto_1.UpdateProfileDto]),
+    __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "updateProfile", null);
-exports.UsersController = UsersController = __decorate([
-    (0, swagger_1.ApiTags)('users'),
+], ChatController.prototype, "getChatHistory", null);
+exports.ChatController = ChatController = __decorate([
+    (0, swagger_1.ApiTags)('chat'),
     (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.Controller)('users'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
-], UsersController);
-//# sourceMappingURL=users.controller.js.map
+    (0, common_1.Controller)('chat'),
+    __metadata("design:paramtypes", [chat_service_1.ChatService])
+], ChatController);
+//# sourceMappingURL=chat.controller.js.map

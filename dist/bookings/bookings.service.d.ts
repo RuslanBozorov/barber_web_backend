@@ -1,12 +1,20 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateBookingDto, UpdateBookingStatusDto } from './dto/booking.dto';
+import { ChatGateway } from '../chat/chat.gateway';
+import { ChatService } from '../chat/chat.service';
 export declare class BookingsService {
     private prisma;
-    constructor(prisma: PrismaService);
+    private chatGateway;
+    private chatService;
+    constructor(prisma: PrismaService, chatGateway: ChatGateway, chatService: ChatService);
+    notifyClient(bookingId: string, masterId: string): Promise<{
+        success: boolean;
+        message: string;
+    }>;
     create(userId: string, dto: CreateBookingDto): Promise<{
         id: string;
-        deletedAt: Date | null;
         createdAt: Date;
+        deletedAt: Date | null;
         updatedAt: Date;
         userId: string;
         masterId: string;
@@ -16,24 +24,24 @@ export declare class BookingsService {
         status: import(".prisma/client").$Enums.BookingStatus;
     }>;
     findMyBookings(userId: string): Promise<({
-        service: {
+        master: {
             name: string;
+            phone: string;
+        };
+        service: {
             id: string;
-            deletedAt: Date | null;
             createdAt: Date;
+            name: string;
+            deletedAt: Date | null;
             updatedAt: Date;
             category: string;
             price: number;
             duration: number;
         };
-        master: {
-            name: string;
-            phone: string;
-        };
     } & {
         id: string;
-        deletedAt: Date | null;
         createdAt: Date;
+        deletedAt: Date | null;
         updatedAt: Date;
         userId: string;
         masterId: string;
@@ -48,10 +56,10 @@ export declare class BookingsService {
             phone: string;
         };
         service: {
-            name: string;
             id: string;
-            deletedAt: Date | null;
             createdAt: Date;
+            name: string;
+            deletedAt: Date | null;
             updatedAt: Date;
             category: string;
             price: number;
@@ -59,8 +67,8 @@ export declare class BookingsService {
         };
     } & {
         id: string;
-        deletedAt: Date | null;
         createdAt: Date;
+        deletedAt: Date | null;
         updatedAt: Date;
         userId: string;
         masterId: string;
@@ -71,8 +79,8 @@ export declare class BookingsService {
     })[]>;
     updateStatus(bookingId: string, masterId: string, status: UpdateBookingStatusDto): Promise<{
         id: string;
-        deletedAt: Date | null;
         createdAt: Date;
+        deletedAt: Date | null;
         updatedAt: Date;
         userId: string;
         masterId: string;

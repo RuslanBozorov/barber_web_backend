@@ -10,7 +10,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  @ApiOperation({ summary: 'Register a new user' })
+  @ApiOperation({ summary: 'Register a new user (Ruhsat: Hamma)' })
   @ApiResponse({ 
     status: 201, 
     description: 'User successfully registered',
@@ -29,7 +29,7 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Log in and get JWT token' })
+  @ApiOperation({ summary: 'Log in and get JWT token (Ruhsat: Hamma)' })
   @ApiResponse({ 
     status: 200, 
     description: 'Successful login',

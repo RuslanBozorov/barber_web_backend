@@ -19,13 +19,10 @@ let ChatService = class ChatService {
     }
     async saveMessage(senderId, receiverId, text) {
         return this.prisma.message.create({
-            data: {
-                senderId,
-                receiverId,
-                text,
-            },
+            data: { senderId, receiverId, text },
             include: {
-                sender: { select: { id: true, name: true, avatar: true } },
+                sender: { select: { id: true, name: true, avatar: true, role: true } },
+                receiver: { select: { id: true, name: true, avatar: true, role: true } },
             },
         });
     }
@@ -38,7 +35,33 @@ let ChatService = class ChatService {
                 ],
             },
             orderBy: { createdAt: 'asc' },
+            include: {
+                sender: { select: { id: true, name: true, avatar: true, role: true } },
+                receiver: { select: { id: true, name: true, avatar: true, role: true } },
+            },
         });
+    }
+    async getMyConversations(userId) {
+        const messages = await this.prisma.message.findMany({
+            where: {
+                OR: [{ senderId: userId }, { receiverId: userId }],
+            },
+            orderBy: { createdAt: 'desc' },
+            include: {
+                sender: { select: { id: true, name: true, avatar: true, role: true } },
+                receiver: { select: { id: true, name: true, avatar: true, role: true } },
+            },
+        });
+        const seen = new Set();
+        const conversations = [];
+        for (const msg of messages) {
+            const otherId = msg.senderId === userId ? msg.receiverId : msg.senderId;
+            if (!seen.has(otherId)) {
+                seen.add(otherId);
+                conversations.push(msg);
+            }
+        }
+        return conversations;
     }
 };
 exports.ChatService = ChatService;

@@ -15,21 +15,21 @@ export class ServicesController {
   @Post()
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.salon)
-  @ApiOperation({ summary: 'Create a new service (Salon only)' })
+  @Roles(Role.master)
+  @ApiOperation({ summary: 'Create a new service (Ruhsat: Master)' })
   async create(@Body() dto: CreateServiceDto) {
     return this.servicesService.create(dto);
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all services' })
+  @ApiOperation({ summary: 'Get all services (Ruhsat: Hamma)' })
   @ApiQuery({ name: 'category', required: false, type: String })
   async findAll(@Query('category') category?: string) {
     return this.servicesService.findAll(category);
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get service by ID' })
+  @ApiOperation({ summary: 'Get service by ID (Ruhsat: Hamma)' })
   async findOne(@Param('id') id: string) {
     return this.servicesService.findOne(id);
   }
@@ -37,8 +37,8 @@ export class ServicesController {
   @Delete(':id')
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.salon)
-  @ApiOperation({ summary: 'Delete a service (Salon only)' })
+  @Roles(Role.master)
+  @ApiOperation({ summary: 'Delete a service (Ruhsat: Master)' })
   async remove(@Param('id') id: string) {
     return this.servicesService.remove(id);
   }

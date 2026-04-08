@@ -4,43 +4,43 @@ export declare class ServicesController {
     private readonly servicesService;
     constructor(servicesService: ServicesService);
     create(dto: CreateServiceDto): Promise<{
-        name: string;
         id: string;
-        deletedAt: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        name: string;
         category: string;
         price: number;
         duration: number;
+        deletedAt: Date | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     findAll(category?: string): Promise<{
-        name: string;
         id: string;
-        deletedAt: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        name: string;
         category: string;
         price: number;
         duration: number;
+        deletedAt: Date | null;
+        createdAt: Date;
+        updatedAt: Date;
     }[]>;
     findOne(id: string): Promise<{
-        name: string;
         id: string;
-        deletedAt: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        name: string;
         category: string;
         price: number;
         duration: number;
+        deletedAt: Date | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     remove(id: string): Promise<{
-        name: string;
         id: string;
-        deletedAt: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
+        name: string;
         category: string;
         price: number;
         duration: number;
+        deletedAt: Date | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
 }

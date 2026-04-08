@@ -13,18 +13,23 @@ const client_1 = require("@prisma/client");
 let PrismaService = PrismaService_1 = class PrismaService extends client_1.PrismaClient {
     logger = new common_1.Logger(PrismaService_1.name);
     async onModuleInit() {
+        this.logger.log('Initializing database connection...');
         let retries = 5;
         while (retries > 0) {
             try {
                 await this.$connect();
-                this.logger.log('Successfully connected to the database.');
+                this.logger.log('✅ Successfully connected to the Render PostgreSQL database.');
                 break;
             }
             catch (err) {
-                this.logger.error(`Database connection failed. Retries left: ${retries - 1}`, err);
+                this.logger.error(`❌ Database connection failed. Retries left: ${retries - 1}`);
+                this.logger.error(`Reason: ${err.message}`);
+                if (err.message.includes('SSL')) {
+                    this.logger.warn('TIP: For Render PostgreSQL, ensure your DATABASE_URL in the dashboard ends with "?sslmode=no-verify" or "?sslmode=require".');
+                }
                 retries -= 1;
                 if (retries === 0) {
-                    this.logger.error('Could not connect to the database after multiple retries.');
+                    this.logger.error('CRITICAL: Could not connect to the database. Application will likely fail.');
                     throw err;
                 }
                 await new Promise(resolve => setTimeout(resolve, 5000));

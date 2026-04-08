@@ -2,9 +2,45 @@ import { Injectable, ConflictException, NotFoundException, BadRequestException }
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateBookingDto, UpdateBookingStatusDto } from './dto/booking.dto';
 
+import { ChatGateway } from '../chat/chat.gateway';
+import { ChatService } from '../chat/chat.service';
+
 @Injectable()
 export class BookingsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private chatGateway: ChatGateway,
+    private chatService: ChatService,
+  ) {}
+
+  async notifyClient(bookingId: string, masterId: string) {
+    const booking = await this.prisma.booking.findUnique({
+      where: { id: bookingId },
+      include: { user: true }
+    });
+
+    if (!booking || booking.masterId !== masterId) {
+      throw new NotFoundException('Booking not found or access denied');
+    }
+
+    const messageText = `Sizning navbatingiz keldi! 15 daqiqadan so'ng kutamiz.`;
+    
+    // 1. Save message to DB
+    const message = await this.chatService.saveMessage(masterId, booking.userId, messageText);
+    
+    // 2. Send real-time notification
+    // We can use the chatGateway's server to emit to the specific user
+    // However, since ChatGateway already has handling, we can try to call a method or just use the server
+    this.chatGateway.server.emit(`notification_${booking.userId}`, {
+      message: messageText,
+      bookingId: booking.id
+    });
+
+    // Also emit as a chat message
+    this.chatGateway.server.emit(`receive_message`, message);
+
+    return { success: true, message: 'Client notified' };
+  }
 
   async create(userId: string, dto: CreateBookingDto) {
     

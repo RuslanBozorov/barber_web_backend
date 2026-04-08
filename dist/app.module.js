@@ -14,7 +14,6 @@ const prisma_module_1 = require("./prisma/prisma.module");
 const auth_module_1 = require("./auth/auth.module");
 const users_module_1 = require("./users/users.module");
 const masters_module_1 = require("./masters/masters.module");
-const salons_module_1 = require("./salons/salons.module");
 const services_module_1 = require("./services/services.module");
 const bookings_module_1 = require("./bookings/bookings.module");
 const chat_module_1 = require("./chat/chat.module");
@@ -31,7 +30,6 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
             masters_module_1.MastersModule,
-            salons_module_1.SalonsModule,
             services_module_1.ServicesModule,
             bookings_module_1.BookingsModule,
             chat_module_1.ChatModule,

@@ -22,7 +22,7 @@ export class RegisterDto {
   @ApiPropertyOptional({ 
     enum: Role, 
     default: Role.client, 
-    description: 'User role (client, master, or salon)' 
+    description: 'Foydalanuvchi roli (client yoki master)' 
   })
   @IsEnum(Role)
   @IsOptional()

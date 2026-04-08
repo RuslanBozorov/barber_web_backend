@@ -12,6 +12,7 @@ const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("@nestjs/config");
 const chat_gateway_1 = require("./chat.gateway");
 const chat_service_1 = require("./chat.service");
+const chat_controller_1 = require("./chat.controller");
 let ChatModule = class ChatModule {
 };
 exports.ChatModule = ChatModule;
@@ -26,8 +27,9 @@ exports.ChatModule = ChatModule = __decorate([
                 inject: [config_1.ConfigService],
             }),
         ],
+        controllers: [chat_controller_1.ChatController],
         providers: [chat_gateway_1.ChatGateway, chat_service_1.ChatService],
-        exports: [chat_service_1.ChatService],
+        exports: [chat_service_1.ChatService, chat_gateway_1.ChatGateway],
     })
 ], ChatModule);
 //# sourceMappingURL=chat.module.js.map

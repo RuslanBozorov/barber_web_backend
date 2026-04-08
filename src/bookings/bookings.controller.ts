@@ -15,7 +15,7 @@ export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a booking' })
+  @ApiOperation({ summary: 'Create a booking (Ruhsat: Client)' })
   @Roles(Role.client)
   @UseGuards(RolesGuard)
   async create(@Request() req, @Body() dto: CreateBookingDto) {
@@ -23,7 +23,7 @@ export class BookingsController {
   }
 
   @Get('my')
-  @ApiOperation({ summary: 'Get current user bookings' })
+  @ApiOperation({ summary: 'Get current user bookings (Ruhsat: Avtorizatsiyadan o\'tganlar)' })
   async findMyBookings(@Request() req) {
     return this.bookingsService.findMyBookings(req.user.id);
   }
@@ -31,7 +31,7 @@ export class BookingsController {
   @Get('master')
   @Roles(Role.master)
   @UseGuards(RolesGuard)
-  @ApiOperation({ summary: 'Get current master bookings' })
+  @ApiOperation({ summary: 'Get current master bookings (Ruhsat: Master)' })
   async findMasterBookings(@Request() req) {
     return this.bookingsService.findMasterBookings(req.user.id);
   }
@@ -39,8 +39,16 @@ export class BookingsController {
   @Patch(':id/status')
   @Roles(Role.master)
   @UseGuards(RolesGuard)
-  @ApiOperation({ summary: 'Update booking status (Master only)' })
+  @ApiOperation({ summary: 'Update booking status (Ruhsat: Master)' })
   async updateStatus(@Request() req, @Param('id') id: string, @Body() body: UpdateBookingStatusDto) {
     return this.bookingsService.updateStatus(id, req.user.id, body);
+  }
+
+  @Post(':id/notify')
+  @Roles(Role.master)
+  @UseGuards(RolesGuard)
+  @ApiOperation({ summary: 'Notify client (Your turn in 15 mins) (Ruhsat: Master)' })
+  async notifyClient(@Request() req, @Param('id') id: string) {
+    return this.bookingsService.notifyClient(id, req.user.id);
   }
 }

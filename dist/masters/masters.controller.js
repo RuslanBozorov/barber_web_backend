@@ -39,7 +39,7 @@ let MastersController = class MastersController {
 exports.MastersController = MastersController;
 __decorate([
     (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Get all masters with pagination and location filter' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all masters with pagination and location filter (Ruhsat: Hamma)' }),
     (0, swagger_1.ApiQuery)({ name: 'page', required: false, type: Number }),
     (0, swagger_1.ApiQuery)({ name: 'limit', required: false, type: Number }),
     (0, swagger_1.ApiQuery)({ name: 'lat', required: false, type: Number }),
@@ -54,7 +54,7 @@ __decorate([
 ], MastersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get master by ID' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get master by ID (Ruhsat: Hamma)' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -65,7 +65,7 @@ __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)(client_1.Role.master),
-    (0, swagger_1.ApiOperation)({ summary: 'Update master profile' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Update master profile (Ruhsat: Master)' }),
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

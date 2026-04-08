@@ -17,30 +17,34 @@ class RegisterDto {
     name;
     phone;
     password;
-    role;
+    role = client_1.Role.client;
 }
 exports.RegisterDto = RegisterDto;
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ example: 'John Doe', description: 'User full name' }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], RegisterDto.prototype, "name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ example: '+998901234567', description: 'Phone number used for login and identification' }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], RegisterDto.prototype, "phone", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiProperty)({ example: 'password123', description: 'User password (min 6 characters)' }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.MinLength)(6),
     __metadata("design:type", String)
 ], RegisterDto.prototype, "password", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ enum: client_1.Role, default: client_1.Role.client }),
+    (0, swagger_1.ApiPropertyOptional)({
+        enum: client_1.Role,
+        default: client_1.Role.client,
+        description: 'Foydalanuvchi roli (client yoki master)'
+    }),
     (0, class_validator_1.IsEnum)(client_1.Role),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)

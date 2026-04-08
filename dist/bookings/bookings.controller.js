@@ -38,11 +38,14 @@ let BookingsController = class BookingsController {
     async updateStatus(req, id, body) {
         return this.bookingsService.updateStatus(id, req.user.id, body);
     }
+    async notifyClient(req, id) {
+        return this.bookingsService.notifyClient(id, req.user.id);
+    }
 };
 exports.BookingsController = BookingsController;
 __decorate([
     (0, common_1.Post)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Create a booking' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a booking (Ruhsat: Client)' }),
     (0, roles_decorator_1.Roles)(client_1.Role.client),
     (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
     __param(0, (0, common_1.Request)()),
@@ -53,7 +56,7 @@ __decorate([
 ], BookingsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)('my'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get current user bookings' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get current user bookings (Ruhsat: Avtorizatsiyadan o\'tganlar)' }),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -63,7 +66,7 @@ __decorate([
     (0, common_1.Get)('master'),
     (0, roles_decorator_1.Roles)(client_1.Role.master),
     (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
-    (0, swagger_1.ApiOperation)({ summary: 'Get current master bookings' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get current master bookings (Ruhsat: Master)' }),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -73,7 +76,7 @@ __decorate([
     (0, common_1.Patch)(':id/status'),
     (0, roles_decorator_1.Roles)(client_1.Role.master),
     (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
-    (0, swagger_1.ApiOperation)({ summary: 'Update booking status (Master only)' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Update booking status (Ruhsat: Master)' }),
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Param)('id')),
     __param(2, (0, common_1.Body)()),
@@ -81,6 +84,17 @@ __decorate([
     __metadata("design:paramtypes", [Object, String, booking_dto_1.UpdateBookingStatusDto]),
     __metadata("design:returntype", Promise)
 ], BookingsController.prototype, "updateStatus", null);
+__decorate([
+    (0, common_1.Post)(':id/notify'),
+    (0, roles_decorator_1.Roles)(client_1.Role.master),
+    (0, common_1.UseGuards)(roles_guard_1.RolesGuard),
+    (0, swagger_1.ApiOperation)({ summary: 'Notify client (Your turn in 15 mins) (Ruhsat: Master)' }),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], BookingsController.prototype, "notifyClient", null);
 exports.BookingsController = BookingsController = __decorate([
     (0, swagger_1.ApiTags)('bookings'),
     (0, swagger_1.ApiBearerAuth)(),

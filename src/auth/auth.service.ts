@@ -22,7 +22,10 @@ export class AuthService {
         data: {
           ...dto,
           password: hashedPassword,
+          // If role is master, create a profile for them
+          masterProfile: dto.role === 'master' ? { create: {} } : undefined,
         },
+        include: { masterProfile: true }
       });
 
       return this.generateToken(user);

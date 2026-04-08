@@ -13,7 +13,7 @@ export class MastersController {
   constructor(private readonly mastersService: MastersService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Get all masters with pagination and location filter' })
+  @ApiOperation({ summary: 'Get all masters with pagination and location filter (Ruhsat: Hamma)' })
   @ApiQuery({ name: 'page', required: false, type: Number })
   @ApiQuery({ name: 'limit', required: false, type: Number })
   @ApiQuery({ name: 'lat', required: false, type: Number })
@@ -28,7 +28,7 @@ export class MastersController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get master by ID' })
+  @ApiOperation({ summary: 'Get master by ID (Ruhsat: Hamma)' })
   async findOne(@Param('id') id: string) {
     return this.mastersService.findOne(id);
   }
@@ -37,7 +37,7 @@ export class MastersController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.master)
-  @ApiOperation({ summary: 'Update master profile' })
+  @ApiOperation({ summary: 'Update master profile (Ruhsat: Master)' })
   async updateProfile(@Request() req, @Body() dto: UpdateMasterDto) {
     return this.mastersService.updateProfile(req.user.id, dto);
   }

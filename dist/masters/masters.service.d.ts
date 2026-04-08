@@ -10,25 +10,21 @@ export declare class MastersService {
                 phone: string;
                 avatar: string | null;
             };
-            salon: {
-                name: string;
-                address: string | null;
-            } | null;
         } & {
             rating: number;
             id: string;
+            bio: string | null;
             deletedAt: Date | null;
             createdAt: Date;
             updatedAt: Date;
             masterType: import(".prisma/client").$Enums.MasterType;
             experience: number;
-            bio: string | null;
-            location: string | null;
+            bannerImage: string | null;
+            workplaceImages: string[];
+            address: string | null;
             latitude: number | null;
             longitude: number | null;
             userId: string;
-            bannerImage: string | null;
-            salonId: string | null;
         })[];
         total: number;
         page: number;
@@ -40,19 +36,6 @@ export declare class MastersService {
             phone: string;
             avatar: string | null;
         };
-        salon: {
-            name: string;
-            description: string | null;
-            id: string;
-            deletedAt: Date | null;
-            createdAt: Date;
-            updatedAt: Date;
-            latitude: number | null;
-            longitude: number | null;
-            ownerId: string;
-            address: string | null;
-            images: string[];
-        } | null;
         services: ({
             service: {
                 name: string;
@@ -60,9 +43,9 @@ export declare class MastersService {
                 deletedAt: Date | null;
                 createdAt: Date;
                 updatedAt: Date;
+                duration: number;
                 category: string;
                 price: number;
-                duration: number;
             };
         } & {
             id: string;
@@ -72,33 +55,33 @@ export declare class MastersService {
     } & {
         rating: number;
         id: string;
+        bio: string | null;
         deletedAt: Date | null;
         createdAt: Date;
         updatedAt: Date;
         masterType: import(".prisma/client").$Enums.MasterType;
         experience: number;
-        bio: string | null;
-        location: string | null;
+        bannerImage: string | null;
+        workplaceImages: string[];
+        address: string | null;
         latitude: number | null;
         longitude: number | null;
         userId: string;
-        bannerImage: string | null;
-        salonId: string | null;
     }>;
     updateProfile(userId: string, dto: UpdateMasterDto): Promise<{
         rating: number;
         id: string;
+        bio: string | null;
         deletedAt: Date | null;
         createdAt: Date;
         updatedAt: Date;
         masterType: import(".prisma/client").$Enums.MasterType;
         experience: number;
-        bio: string | null;
-        location: string | null;
+        bannerImage: string | null;
+        workplaceImages: string[];
+        address: string | null;
         latitude: number | null;
         longitude: number | null;
         userId: string;
-        bannerImage: string | null;
-        salonId: string | null;
     }>;
 }

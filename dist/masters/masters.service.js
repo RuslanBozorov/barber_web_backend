@@ -25,7 +25,6 @@ let MastersService = class MastersService {
             take: limit,
             include: {
                 user: { select: { name: true, phone: true, avatar: true } },
-                salon: { select: { name: true, address: true } },
             },
             orderBy: { rating: 'desc' },
         });
@@ -37,7 +36,6 @@ let MastersService = class MastersService {
             where: { id },
             include: {
                 user: { select: { name: true, phone: true, avatar: true } },
-                salon: true,
                 services: { include: { service: true } },
             },
         });

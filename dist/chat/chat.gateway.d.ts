@@ -14,16 +14,38 @@ export declare class ChatGateway implements OnGatewayConnection, OnGatewayDiscon
         receiverId: string;
         text: string;
     }): Promise<{
-        sender: {
-            name: string;
+        event: string;
+        data: {
+            sender: {
+                id: string;
+                name: string;
+                role: import(".prisma/client").$Enums.Role;
+                avatar: string | null;
+            };
+            receiver: {
+                id: string;
+                name: string;
+                role: import(".prisma/client").$Enums.Role;
+                avatar: string | null;
+            };
+        } & {
             id: string;
-            avatar: string | null;
+            text: string;
+            createdAt: Date;
+            senderId: string;
+            receiverId: string;
         };
-    } & {
-        id: string;
-        createdAt: Date;
-        text: string;
-        senderId: string;
+    } | undefined>;
+    handleGetHistory(client: Socket, payload: {
+        otherUserId: string;
+    }): Promise<void>;
+    handleTyping(client: Socket, payload: {
         receiverId: string;
-    }>;
+    }): void;
+    handleStopTyping(client: Socket, payload: {
+        receiverId: string;
+    }): void;
+    handleCheckOnline(client: Socket, payload: {
+        userId: string;
+    }): void;
 }

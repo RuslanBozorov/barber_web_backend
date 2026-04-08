@@ -16,7 +16,7 @@ export class UploadController {
   ) {}
 
   @Post('avatar')
-  @ApiOperation({ summary: 'Upload profile image' })
+  @ApiOperation({ summary: 'Upload profile image (Ruhsat: Avtorizatsiyadan o\'tganlar)' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -35,7 +35,7 @@ export class UploadController {
   }
 
   @Post('banner')
-  @ApiOperation({ summary: 'Upload master banner image' })
+  @ApiOperation({ summary: 'Upload master banner image (Ruhsat: Avtorizatsiyadan o\'tganlar)' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -55,7 +55,7 @@ export class UploadController {
   }
 
   @Post('salon-images')
-  @ApiOperation({ summary: 'Upload salon images' })
+  @ApiOperation({ summary: 'Upload salon images (Ruhsat: Avtorizatsiyadan o\'tganlar)' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {

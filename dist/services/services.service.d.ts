@@ -9,9 +9,9 @@ export declare class ServicesService {
         deletedAt: Date | null;
         createdAt: Date;
         updatedAt: Date;
+        duration: number;
         category: string;
         price: number;
-        duration: number;
     }>;
     findAll(category?: string): Promise<{
         name: string;
@@ -19,9 +19,9 @@ export declare class ServicesService {
         deletedAt: Date | null;
         createdAt: Date;
         updatedAt: Date;
+        duration: number;
         category: string;
         price: number;
-        duration: number;
     }[]>;
     findOne(id: string): Promise<{
         name: string;
@@ -29,9 +29,9 @@ export declare class ServicesService {
         deletedAt: Date | null;
         createdAt: Date;
         updatedAt: Date;
+        duration: number;
         category: string;
         price: number;
-        duration: number;
     }>;
     remove(id: string): Promise<{
         name: string;
@@ -39,8 +39,8 @@ export declare class ServicesService {
         deletedAt: Date | null;
         createdAt: Date;
         updatedAt: Date;
+        duration: number;
         category: string;
         price: number;
-        duration: number;
     }>;
 }

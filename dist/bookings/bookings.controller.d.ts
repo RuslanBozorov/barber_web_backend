@@ -5,8 +5,8 @@ export declare class BookingsController {
     constructor(bookingsService: BookingsService);
     create(req: any, dto: CreateBookingDto): Promise<{
         id: string;
-        deletedAt: Date | null;
         createdAt: Date;
+        deletedAt: Date | null;
         updatedAt: Date;
         userId: string;
         masterId: string;
@@ -16,24 +16,24 @@ export declare class BookingsController {
         status: import(".prisma/client").$Enums.BookingStatus;
     }>;
     findMyBookings(req: any): Promise<({
-        service: {
+        master: {
             name: string;
+            phone: string;
+        };
+        service: {
             id: string;
-            deletedAt: Date | null;
             createdAt: Date;
+            name: string;
+            deletedAt: Date | null;
             updatedAt: Date;
             category: string;
             price: number;
             duration: number;
         };
-        master: {
-            name: string;
-            phone: string;
-        };
     } & {
         id: string;
-        deletedAt: Date | null;
         createdAt: Date;
+        deletedAt: Date | null;
         updatedAt: Date;
         userId: string;
         masterId: string;
@@ -48,10 +48,10 @@ export declare class BookingsController {
             phone: string;
         };
         service: {
-            name: string;
             id: string;
-            deletedAt: Date | null;
             createdAt: Date;
+            name: string;
+            deletedAt: Date | null;
             updatedAt: Date;
             category: string;
             price: number;
@@ -59,8 +59,8 @@ export declare class BookingsController {
         };
     } & {
         id: string;
-        deletedAt: Date | null;
         createdAt: Date;
+        deletedAt: Date | null;
         updatedAt: Date;
         userId: string;
         masterId: string;
@@ -71,8 +71,8 @@ export declare class BookingsController {
     })[]>;
     updateStatus(req: any, id: string, body: UpdateBookingStatusDto): Promise<{
         id: string;
-        deletedAt: Date | null;
         createdAt: Date;
+        deletedAt: Date | null;
         updatedAt: Date;
         userId: string;
         masterId: string;
@@ -80,5 +80,9 @@ export declare class BookingsController {
         date: Date;
         time: string;
         status: import(".prisma/client").$Enums.BookingStatus;
+    }>;
+    notifyClient(req: any, id: string): Promise<{
+        success: boolean;
+        message: string;
     }>;
 }

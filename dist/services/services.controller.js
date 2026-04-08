@@ -44,8 +44,8 @@ __decorate([
     (0, common_1.Post)(),
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(client_1.Role.salon),
-    (0, swagger_1.ApiOperation)({ summary: 'Create a new service (Salon only)' }),
+    (0, roles_decorator_1.Roles)(client_1.Role.master),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new service (Ruhsat: Master)' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_service_dto_1.CreateServiceDto]),
@@ -53,7 +53,7 @@ __decorate([
 ], ServicesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Get all services' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all services (Ruhsat: Hamma)' }),
     (0, swagger_1.ApiQuery)({ name: 'category', required: false, type: String }),
     __param(0, (0, common_1.Query)('category')),
     __metadata("design:type", Function),
@@ -62,7 +62,7 @@ __decorate([
 ], ServicesController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get service by ID' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get service by ID (Ruhsat: Hamma)' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -72,8 +72,8 @@ __decorate([
     (0, common_1.Delete)(':id'),
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
-    (0, roles_decorator_1.Roles)(client_1.Role.salon),
-    (0, swagger_1.ApiOperation)({ summary: 'Delete a service (Salon only)' }),
+    (0, roles_decorator_1.Roles)(client_1.Role.master),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a service (Ruhsat: Master)' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

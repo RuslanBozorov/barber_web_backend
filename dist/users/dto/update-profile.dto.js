@@ -9,45 +9,73 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateSalonDto = void 0;
+exports.UpdateProfileDto = void 0;
 const class_validator_1 = require("class-validator");
 const swagger_1 = require("@nestjs/swagger");
-class UpdateSalonDto {
+class UpdateProfileDto {
     name;
-    description;
+    phone;
+    avatar;
+    bio;
+    bannerImage;
+    workplaceImages;
     address;
     latitude;
     longitude;
 }
-exports.UpdateSalonDto = UpdateSalonDto;
+exports.UpdateProfileDto = UpdateProfileDto;
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], UpdateSalonDto.prototype, "name", void 0);
+], UpdateProfileDto.prototype, "name", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], UpdateSalonDto.prototype, "description", void 0);
+], UpdateProfileDto.prototype, "phone", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], UpdateSalonDto.prototype, "address", void 0);
+], UpdateProfileDto.prototype, "avatar", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], UpdateProfileDto.prototype, "bio", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], UpdateProfileDto.prototype, "bannerImage", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: [String] }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Array)
+], UpdateProfileDto.prototype, "workplaceImages", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], UpdateProfileDto.prototype, "address", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
-], UpdateSalonDto.prototype, "latitude", void 0);
+], UpdateProfileDto.prototype, "latitude", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)(),
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
-], UpdateSalonDto.prototype, "longitude", void 0);
-//# sourceMappingURL=update-salon.dto.js.map
+], UpdateProfileDto.prototype, "longitude", void 0);
+//# sourceMappingURL=update-profile.dto.js.map

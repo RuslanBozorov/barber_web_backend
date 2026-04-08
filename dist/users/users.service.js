@@ -20,19 +20,48 @@ let UsersService = class UsersService {
     async getProfile(userId) {
         const user = await this.prisma.user.findUnique({
             where: { id: userId },
-            select: {
-                id: true,
-                name: true,
-                phone: true,
-                role: true,
-                avatar: true,
-                createdAt: true,
+            include: {
+                masterProfile: true,
             },
         });
         if (!user) {
-            throw new common_1.NotFoundException('User not found');
+            throw new common_1.NotFoundException('Foydalanuvchi topilmadi');
         }
-        return user;
+        const { password, ...result } = user;
+        return result;
+    }
+    async updateProfile(userId, dto) {
+        const user = await this.prisma.user.findUnique({
+            where: { id: userId },
+            include: { masterProfile: true }
+        });
+        if (!user) {
+            throw new common_1.NotFoundException('Foydalanuvchi topilmadi');
+        }
+        const { name, phone, avatar, bio, bannerImage, workplaceImages, address, latitude, longitude } = dto;
+        await this.prisma.user.update({
+            where: { id: userId },
+            data: {
+                name,
+                phone,
+                avatar,
+                bio: user.role === 'master' ? undefined : bio,
+            }
+        });
+        if (user.role === 'master' && user.masterProfile) {
+            await this.prisma.masterProfile.update({
+                where: { id: user.masterProfile.id },
+                data: {
+                    bio,
+                    bannerImage,
+                    workplaceImages: workplaceImages ? { set: workplaceImages } : undefined,
+                    address,
+                    latitude,
+                    longitude,
+                }
+            });
+        }
+        return this.getProfile(userId);
     }
 };
 exports.UsersService = UsersService;
