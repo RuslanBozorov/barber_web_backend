@@ -3,7 +3,7 @@ services:
     name: barber-backend
     env: docker # Using docker so we can run the migrate script efficiently, or "node" if leveraging Render Native Node runtime. Since Docker is recommended, we map to Dockerfile.
     buildCommand: npm install && npm run build
-    startCommand: npx prisma migrate deploy && npm run start:prod
+    startCommand: npx prisma db push --accept-data-loss && npm run start:prod
     envVars:
       - key: NODE_ENV
         value: production
